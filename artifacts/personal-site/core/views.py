@@ -45,3 +45,8 @@ def poetry_cinema(request):
 def contact(request):
     """Render the contact information page."""
     return _render_page(request, "core/contact.html", "contact")
+
+
+def privacy(request):
+    """Render the privacy and cookies policy."""
+    return _render_page(request, "core/privacy.html", "privacy")

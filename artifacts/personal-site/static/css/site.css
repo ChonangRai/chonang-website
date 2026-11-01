@@ -496,6 +496,19 @@ a:focus-visible {
   margin: 0;
 }
 
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem 1.4rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
 .footer-top {
   text-decoration: none;
   transition: color 160ms ease;
@@ -605,8 +618,9 @@ a:focus-visible {
     text-align: right;
   }
 
-  .footer-top {
+  .footer-links {
     grid-column: 1 / -1;
+    justify-content: flex-start;
   }
 }
 
