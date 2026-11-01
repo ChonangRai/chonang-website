@@ -1,0 +1,1 @@
+- [Django manifest static assets](django-static-manifest.md) — Refresh collected assets and restart the app after CSS changes so preview uses current hashed files.
