@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Your Name — Computing, writing, and cinema{% endblock %}
+
+{% block content %}
+  <section class="intro" id="about" aria-labelledby="intro-title">
+    <p class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span> A personal website</p>
+    <h1 id="intro-title">Thinking about the things we build—and the stories we tell.</h1>
+
+    <div class="intro-details">
+      <p class="intro-lead">
+        Hello, I’m <span class="name-placeholder">Your Name</span>—a curious person working
+        across computing, research, and creative practice.
+      </p>
+      <p class="intro-copy">
+        I’m interested in programming, cybersecurity, and academic research, as well as the
+        quieter work of writing poetry and paying attention to films. This is a place to bring
+        those threads together.
+      </p>
+    </div>
+
+    <div class="intro-index" aria-label="Areas of interest">
+      <span class="index-label">Areas of interest</span>
+      <p>Computing <span aria-hidden="true">/</span> Research <span aria-hidden="true">/</span>
+        Writing <span aria-hidden="true">/</span> Cinema</p>
+    </div>
+
+    <p class="page-number" aria-hidden="true">01 <span>—</span> A work in progress</p>
+  </section>
+{% endblock %}

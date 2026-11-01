@@ -1,0 +1,20 @@
+kind = "web"
+previewPath = "/"
+title = "Personal Website"
+description = "A personal website built with Django templates and plain CSS, introducing its owner and their work across computing, research, writing, and cinema."
+version = "1.0.0"
+id = "artifacts/personal-site"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25158
+
+[services.development]
+run = "python manage.py runserver 0.0.0.0:$PORT"
+
+
+[services.env]
+PORT = "25158"
+BASE_PATH = "/"
