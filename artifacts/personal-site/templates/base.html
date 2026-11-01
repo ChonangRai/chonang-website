@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Chonang's personal website about computing, cybersecurity, research, writing, poetry, and cinema.">
+    <meta name="description" content="{% block meta_description %}Chonang's personal website about computing, cybersecurity, research, writing, poetry, and cinema.{% endblock %}">
     <meta name="theme-color" content="#f6f3ec">
     <title>{% block title %}Chonang — Personal Website{% endblock %}</title>
     <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
@@ -19,12 +19,13 @@
           <span class="wordmark-note">Personal website</span>
         </a>
         <nav class="site-nav" aria-label="Main navigation">
-          <a href="#top">Home</a>
-          <a href="#about">About</a>
-          <a href="#work">Work</a>
-          <a href="#writing">Writing</a>
-          <a href="#poetry-cinema">Poetry &amp; Cinema</a>
-          <a href="#contact">Contact</a>
+          <a href="{% url 'core:home' %}"{% if active_page == "home" %} aria-current="page"{% endif %}>Home</a>
+          <a href="{% url 'core:about' %}"{% if active_page == "about" %} aria-current="page"{% endif %}>About</a>
+          <a href="{% url 'core:academic_work' %}"{% if active_page == "academic_work" %} aria-current="page"{% endif %}>Academic Work</a>
+          <a href="{% url 'core:projects' %}"{% if active_page == "projects" %} aria-current="page"{% endif %}>Projects</a>
+          <a href="{% url 'core:writing' %}"{% if active_page == "writing" %} aria-current="page"{% endif %}>Writing</a>
+          <a href="{% url 'core:poetry_cinema' %}"{% if active_page == "poetry_cinema" %} aria-current="page"{% endif %}>Poetry &amp; Cinema</a>
+          <a href="{% url 'core:contact' %}"{% if active_page == "contact" %} aria-current="page"{% endif %}>Contact</a>
         </nav>
       </header>
 

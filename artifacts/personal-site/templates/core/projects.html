@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Projects — Chonang{% endblock %}
+{% block meta_description %}Practical software and web projects built by Chonang.{% endblock %}
+
+{% block content %}
+  <section class="content-section inner-page" aria-labelledby="page-title">
+    <div class="section-rail">
+      <span class="section-number">03</span>
+      <span class="section-label">Projects</span>
+    </div>
+    <div class="section-body">
+      <p class="section-pretitle">Built and explored</p>
+      <h1 class="page-title" id="page-title">A record of things made.</h1>
+      <div class="page-copy">
+        <p class="page-lede">
+          This page is for practical software and web projects that I have actually built.
+        </p>
+        <p>
+          No individual practical projects are listed here yet. Academic research and proposed
+          concepts are described separately on the <a href="{% url 'core:academic_work' %}">Academic Work</a> page.
+        </p>
+      </div>
+    </div>
+  </section>
+{% endblock %}
