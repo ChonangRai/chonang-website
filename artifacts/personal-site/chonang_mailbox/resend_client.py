@@ -42,6 +42,7 @@ def _get_json(path):
         headers={
             "Authorization": f"Bearer {_get_api_key()}",
             "Accept": "application/json",
+            "User-Agent": "chonang-mail/1.0",
         },
         method="GET",
     )
