@@ -6,4 +6,5 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("core.urls")),
+    path("webhooks/resend/", include("chonang_mailbox.urls")),
 ]

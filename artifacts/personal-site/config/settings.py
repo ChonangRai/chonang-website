@@ -100,6 +100,10 @@ R2_STORAGE = {
     "region_name": os.environ.get("R2_REGION", "auto"),
 }
 
+# Resend email configuration
+RESEND_API_KEY = os.environ.get("DJANGO_RESEND_API", "")
+RESEND_WEBHOOK_SECRET = os.environ.get("RESEND_WEBHOOK_SECRET", "")
+
 SECURE_SSL_REDIRECT = (
     os.environ.get("DJANGO_SECURE_SSL_REDIRECT", "False").lower()
     in {"true", "1", "yes"}

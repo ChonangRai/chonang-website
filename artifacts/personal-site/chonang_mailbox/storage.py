@@ -62,3 +62,14 @@ def create_download_url(object_key, expires_in=300):
         },
         ExpiresIn=expires_in,
     )
+
+def delete_attachment(object_key):
+    """Delete an attachment from the private R2 bucket."""
+
+    client = get_r2_client()
+    config = settings.R2_STORAGE
+
+    client.delete_object(
+        Bucket=config["bucket_name"],
+        Key=object_key,
+    )
