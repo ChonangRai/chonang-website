@@ -153,6 +153,7 @@ def download_attachment(request, attachment_id):
         download_url = create_download_url(
             attachment.storage_key,
             expires_in=300,
+            filename=attachment.filename,
         )
     except Exception:
         logger.exception(

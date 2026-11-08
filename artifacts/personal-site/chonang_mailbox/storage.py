@@ -2,6 +2,7 @@
 """Private attachment storage using Cloudflare R2."""
 
 import boto3
+from urllib.parse import quote
 from botocore.config import Config
 from django.conf import settings
 
@@ -49,17 +50,25 @@ def upload_attachment(file_object, object_key, content_type):
     return object_key
 
 
-def create_download_url(object_key, expires_in=300):
+def create_download_url(object_key, expires_in=300, filename=None):
     """Create a temporary private download URL."""
+
     client = get_r2_client()
     config = settings.R2_STORAGE
 
+    params = {
+        "Bucket": config["bucket_name"],
+        "Key": object_key,
+    }
+
+    if filename:
+        params["ResponseContentDisposition"] = (
+            f"attachment; filename*=UTF-8''{quote(filename, safe='')}"
+        )
+
     return client.generate_presigned_url(
         "get_object",
-        Params={
-            "Bucket": config["bucket_name"],
-            "Key": object_key,
-        },
+        Params=params,
         ExpiresIn=expires_in,
     )
 
