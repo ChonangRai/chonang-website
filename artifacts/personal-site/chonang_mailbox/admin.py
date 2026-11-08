@@ -2,6 +2,8 @@
 """Admin configuration for Chonang Mail."""
 
 from django.contrib import admin
+from django.utils.html import format_html
+from django.urls import reverse
 
 from .models import EmailAttachment, EmailMessage, EmailThread
 
@@ -13,9 +15,25 @@ class EmailAttachmentInline(admin.TabularInline):
         "filename",
         "content_type",
         "size_bytes",
+        "download_link",
         "storage_key",
         "created_at",
     )
+
+    @admin.display(description="Download")
+    def download_link(self, obj):
+        if not obj or not obj.pk:
+            return "-"
+
+        url = reverse(
+            "download_attachment",
+            args=[obj.pk],
+        )
+
+        return format_html(
+            '<a href="{}">Download attachment</a>',
+            url,
+        )
 
 
 class EmailMessageInline(admin.TabularInline):

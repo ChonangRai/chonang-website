@@ -4,14 +4,16 @@ import json
 import logging
 
 from django.conf import settings
+from django.contrib.admin.views.decorators import staff_member_required
 from django.db import IntegrityError
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from svix.webhooks import Webhook, WebhookVerificationError
 
 from .email_processing import process_received_email
-from .models import EmailMessage
+from .models import EmailAttachment, EmailMessage
+from .storage import create_download_url
 from .resend_client import ResendAPIError
 
 
@@ -135,3 +137,31 @@ def resend_webhook(request):
         },
         status=200,
     )
+
+@staff_member_required
+def download_attachment(request, attachment_id):
+    """Generate a temporary private download link for an attachment."""
+
+    attachment = EmailAttachment.objects.filter(
+        pk=attachment_id
+    ).first()
+
+    if not attachment:
+        raise Http404("Attachment not found.")
+
+    try:
+        download_url = create_download_url(
+            attachment.storage_key,
+            expires_in=300,
+        )
+    except Exception:
+        logger.exception(
+            "Could not generate download URL for attachment %s.",
+            attachment_id,
+        )
+        return JsonResponse(
+            {"error": "Could not download attachment."},
+            status=503,
+        )
+
+    return HttpResponseRedirect(download_url)
