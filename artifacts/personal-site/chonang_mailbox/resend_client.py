@@ -51,8 +51,23 @@ def _get_json(path):
             return json.loads(response.read().decode("utf-8"))
 
     except HTTPError as exc:
+        error_body = exc.read().decode("utf-8", errors="replace")
+
+        try:
+            error_data = json.loads(error_body)
+            detail = (
+                error_data.get("message")
+                or error_data.get("error")
+                or error_data.get("name")
+            )
+        except (json.JSONDecodeError, AttributeError):
+            detail = None
+
+        if not isinstance(detail, str):
+            detail = "No additional details returned."
+
         raise ResendAPIError(
-            f"Resend returned HTTP {exc.code}."
+            f"Resend returned HTTP {exc.code}: {detail[:300]}"
         ) from exc
 
     except (URLError, TimeoutError) as exc:
