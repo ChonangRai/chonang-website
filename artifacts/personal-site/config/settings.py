@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "core",
+    "chonang_mailbox",
 ]
 
 MIDDLEWARE = [
@@ -89,6 +90,15 @@ STORAGES = {
 }
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Cloudflare R2 private attachment storage
+R2_STORAGE = {
+    "endpoint_url": os.environ.get("R2_ENDPOINT_URL", ""),
+    "access_key_id": os.environ.get("R2_ACCESS_KEY_ID", ""),
+    "secret_access_key": os.environ.get("R2_SECRET_ACCESS_KEY", ""),
+    "bucket_name": os.environ.get("R2_BUCKET_NAME", ""),
+    "region_name": os.environ.get("R2_REGION", "auto"),
+}
 
 SECURE_SSL_REDIRECT = (
     os.environ.get("DJANGO_SECURE_SSL_REDIRECT", "False").lower()
